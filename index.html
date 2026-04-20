@@ -364,6 +364,23 @@
 </style>
 </head>
 <body>
+<div style="
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background: white;
+  border-bottom: 1px solid #eee;
+  padding: 10px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+">
+  <div style="font-weight: 600;">Demo Mode</div>
+
+  <button class="btn btn-sm" onclick="resetDemo()">
+    Reset Demo
+  </button>
+</div>
 <div class="app">
   <nav class="nav">
     <div class="nav-logo">
@@ -928,6 +945,26 @@
 </div>
 
 <script>
+function resetDemo() {
+  if (!confirm('Reset demo to initial state?')) return;
+
+  localStorage.removeItem('emprefer_state');
+
+  appState = {
+    pending: ['maybank'],
+    active: ['petronas']
+  };
+
+  reviewState = [
+    { id: 'ahmad', visible: true },
+    { id: 'siti', visible: true },
+    { id: 'faridah', visible: true },
+    { id: 'wei', visible: true },
+    { id: 'razif', visible: false, pending: true }
+  ];
+
+  location.reload();
+}
 function showToast(message) {
   const t = document.createElement('div');
   t.innerText = message;
